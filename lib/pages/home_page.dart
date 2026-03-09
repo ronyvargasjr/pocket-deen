@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:pocket_deen/pages/phrases_page.dart';
 import 'package:pocket_deen/pages/duas_page.dart';
-import 'package:pocket_deen/pages/qibla_page.dart';
-import 'package:pocket_deen/pages/tasbih_page.dart';
+import 'package:pocket_deen/pages/tools_page.dart';
 import 'package:pocket_deen/pages/prayer_times_page.dart';
+import 'package:pocket_deen/pages/favorites_page.dart';
 import 'package:provider/provider.dart';
 import '../utils/theme_provider.dart';
 
@@ -23,17 +23,17 @@ class _HomePageState extends State<HomePage> {
   final List<Widget> _pages = const [
     PhrasesPage(),
     DuasPage(),
-    QiblaPage(),
-    TasbihPage(),
+    ToolsPage(),
     PrayerTimesPage(),
+    FavoritesPage(),
   ];
 
   final List<String> _titles = const [
     'Islamic Phrases',
     'Daily Duas',
-    'Qibla Compass',
-    'Tasbih Counter',
+    'Tools',
     'Prayer Times',
+    'Favorites',
   ];
 
   @override
@@ -76,9 +76,9 @@ class _HomePageState extends State<HomePage> {
         items: const [
           BottomNavigationBarItem(icon: Icon(Icons.format_quote), label: 'Phrases'),
           BottomNavigationBarItem(icon: Icon(Icons.menu_book), label: 'Duas'),
-          BottomNavigationBarItem(icon: Icon(Icons.explore), label: 'Qibla'),
-          BottomNavigationBarItem(icon: Icon(Icons.fingerprint), label: 'Tasbih'),
+          BottomNavigationBarItem(icon: Icon(Icons.build), label: 'Tools'),
           BottomNavigationBarItem(icon: Icon(Icons.access_time), label: 'Prayers'),
+          BottomNavigationBarItem(icon: Icon(Icons.favorite), label: 'Favorites'),
         ],
         selectedItemColor: Theme.of(context).colorScheme.primary,
         unselectedItemColor: Colors.grey,

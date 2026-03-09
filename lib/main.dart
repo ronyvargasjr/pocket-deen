@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:pocket_deen/pages/home_page.dart';
+import 'package:pocket_deen/pages/qibla_page.dart';
+import 'package:pocket_deen/pages/tasbih_page.dart';
 import 'package:pocket_deen/utils/app_theme.dart';
 import 'package:pocket_deen/utils/locale_provider.dart';
 import 'package:provider/provider.dart';
@@ -46,6 +48,10 @@ class PocketDeenApp extends StatelessWidget {
               return supportedLocales.first;
             },
             home: const HomePage(),
+            routes: {
+              '/qibla': (context) => const QiblaPage(),
+              '/tasbih': (context) => const TasbihPage(),
+            },
           );
         },
       ),

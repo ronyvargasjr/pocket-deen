@@ -1,10 +1,9 @@
 [
-  {"arabic": "السلام عليكم", "english": "Peace be upon you"},
-  {"arabic": "جزاك الله خيرًا", "english": "May Allah reward you with goodness"},
-  {"arabic": "الحمد لله", "english": "All praise is due to Allah"},
-  {"arabic": "سبحان الله", "english": "Glory be to Allah"},
-  {"arabic": "ما شاء الله", "english": "As Allah has willed"},
-  {"arabic": "إن شاء الله", "english": "If Allah wills"},
-  {"arabic": "أستغفر الله", "english": "I seek forgiveness from Allah"},
-  {"arabic": "أستغفر الله", "english": "I seek forgiveness from Allah"}
+  {"arabic": "السلام عليكم", "transliteration": "As-salamu alaykum", "english": "Peace be upon you"},
+  {"arabic": "جزاك الله خيرًا", "transliteration": "Jazakallahu khayran", "english": "May Allah reward you with goodness"},
+  {"arabic": "الحمد لله", "transliteration": "Alhamdulillah", "english": "All praise is due to Allah"},
+  {"arabic": "سبحان الله", "transliteration": "Subhanallah", "english": "Glory be to Allah"},
+  {"arabic": "ما شاء الله", "transliteration": "Ma sha' Allah", "english": "As Allah has willed"},
+  {"arabic": "إن شاء الله", "transliteration": "In sha' Allah", "english": "If Allah wills"},
+  {"arabic": "أستغفر الله", "transliteration": "Astaghfirullah", "english": "I seek forgiveness from Allah"}
 ]

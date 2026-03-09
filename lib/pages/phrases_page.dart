@@ -62,33 +62,76 @@ class _PhrasesPageState extends State<PhrasesPage> {
               return Card(
                 color: AppTheme.cardBg,
                 margin: const EdgeInsets.symmetric(vertical: 8),
-                child: ListTile(
-                  title: ArabicText(
-                    phrase['arabic'],
-                    fontSize: 24,
-                  ),
-                  subtitle: Padding(
-                    padding: const EdgeInsets.only(top: 8.0),
-                    child: Text(
-                      phrase['english'],
-                      style: AppTheme.cardText3Style,
-                    ),
-                  ),
-                  trailing: Row(
-                    mainAxisSize: MainAxisSize.min,
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 12.0),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      IconButton(
-                        icon: const Icon(Icons.copy, color: Colors.black,),
-                        onPressed: () {
-                          Clipboard.setData(ClipboardData(text: phrase['arabic']));
-                          ScaffoldMessenger.of(context).showSnackBar(
-                            const SnackBar(content: Text('Copied to clipboard!')),
-                          );
-                        },
+                      // Arabic row
+                      Row(
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [
+                          Expanded(
+                            child: ArabicText(
+                              phrase['arabic'],
+                              fontSize: 24,
+                              align: TextAlign.left,
+                            ),
+                          ),
+                          IconButton(
+                            icon: const Icon(Icons.copy, color: Colors.black,),
+                            tooltip: 'Copy Arabic',
+                            onPressed: () {
+                              Clipboard.setData(ClipboardData(text: phrase['arabic']));
+                              ScaffoldMessenger.of(context).showSnackBar(
+                                const SnackBar(content: Text('Copied Arabic to clipboard!')),
+                              );
+                            },
+                          ),
+                        ],
                       ),
-                      FavoriteButton(
-                        isFavorite: _favorites.contains(phrase['arabic']),
-                        onTap: () => _toggleFavorite(phrase['arabic']),
+                      if (phrase['transliteration'] != null)
+                        Padding(
+                          padding: const EdgeInsets.only(top: 8.0),
+                          child: Row(
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            children: [
+                              Expanded(
+                                child: Text(
+                                  phrase['transliteration'],
+                                  style: const TextStyle(fontSize: 15, fontStyle: FontStyle.italic, color: Colors.black87),
+                                ),
+                              ),
+                              IconButton(
+                                icon: const Icon(Icons.copy, color: Colors.black),
+                                tooltip: 'Copy Transliteration',
+                                onPressed: () {
+                                  Clipboard.setData(ClipboardData(text: phrase['transliteration']));
+                                  ScaffoldMessenger.of(context).showSnackBar(
+                                    const SnackBar(content: Text('Copied transliteration to clipboard!')),
+                                  );
+                                },
+                              ),
+                            ],
+                          ),
+                        ),
+                      Padding(
+                        padding: const EdgeInsets.only(top: 8.0),
+                        child: Row(
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: [
+                            Expanded(
+                              child: Text(
+                                phrase['english'],
+                                style: AppTheme.cardText3Style,
+                              ),
+                            ),
+                            FavoriteButton(
+                              isFavorite: _favorites.contains(phrase['arabic']),
+                              onTap: () => _toggleFavorite(phrase['arabic']),
+                            ),
+                          ],
+                        ),
                       ),
                     ],
                   ),
