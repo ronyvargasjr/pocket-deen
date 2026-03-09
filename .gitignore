@@ -1,0 +1,14 @@
+.dart_tool/
+build/
+.idea/
+.packages
+pubspec.lock
+.flutter-plugins
+.flutter-plugins-dependencies
+.melos_tool_version
+.melos_workspace.yaml
+*.iml
+*.log
+*.tmp
+*.swp
+*.DS_Store

@@ -1,0 +1,14 @@
+{
+  "appTitle": "Pocket Deen",
+  "islamicPhrases": "Islamic Phrases",
+  "dailyDuas": "Daily Duas",
+  "qiblaCompass": "Qibla Compass",
+  "tasbihCounter": "Tasbih Counter",
+  "prayerTimes": "Prayer Times",
+  "favorites": "Favorites",
+  "tap": "Tap",
+  "reset": "Reset",
+  "copied": "Copied to clipboard!",
+  "enableLocationQibla": "Enable location to show Qibla direction",
+  "enableLocationPrayers": "Enable location to show prayer times"
+}

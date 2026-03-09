@@ -1,0 +1,19 @@
+{
+  "Morning": [
+    {"arabic": "اللهم بك أصبحنا وبك أمسينا", "english": "O Allah, by You we enter the morning and by You we enter the evening."},
+    {"arabic": "أصبحنا وأصبح الملك لله", "english": "We have entered a new morning and with it all dominion is Allah’s."}
+  ],
+  "Evening": [
+    {"arabic": "اللهم بك أمسينا وبك أصبحنا", "english": "O Allah, by You we enter the evening and by You we enter the morning."},
+    {"arabic": "أمسينا وأمسى الملك لله", "english": "We have entered a new evening and with it all dominion is Allah’s."}
+  ],
+  "Before sleep": [
+    {"arabic": "باسمك اللهم أموت وأحيا", "english": "In Your name, O Allah, I die and I live."}
+  ],
+  "Traveling": [
+    {"arabic": "سبحان الذي سخر لنا هذا", "english": "Glory to Him who has subjected this to us."}
+  ],
+  "Gratitude": [
+    {"arabic": "الحمد لله الذي أطعمنا وسقانا", "english": "All praise is due to Allah who has fed us and given us drink."}
+  ]
+}
