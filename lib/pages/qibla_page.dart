@@ -7,7 +7,9 @@ import 'package:geolocator/geolocator.dart';
 import 'dart:async';
 
 class QiblaPage extends StatefulWidget {
-  const QiblaPage({super.key});
+  const QiblaPage({super.key, this.embedded = false});
+
+  final bool embedded;
 
   @override
   State<QiblaPage> createState() => _QiblaPageState();
@@ -71,6 +73,45 @@ class _QiblaPageState extends State<QiblaPage> {
 
   @override
   Widget build(BuildContext context) {
+    final body = Container(
+      width: double.infinity,
+      child: Center(
+        child: _qiblaDirection == null
+            ? _buildLocationPrompt(context)
+            : Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Stack(
+                    alignment: Alignment.center,
+                    children: [
+                      Container(
+                        width: 220,
+                        height: 220,
+                        decoration: BoxDecoration(
+                          shape: BoxShape.circle,
+                          color: Theme.of(context).colorScheme.surface,
+                          border: Border.all(color: Colors.green, width: 4),
+                        ),
+                      ),
+                      Transform.rotate(
+                        angle: (() {
+                          double a = (_qiblaDirection! - _heading) % 360;
+                          if (a > 180) a -= 360;
+                          return a * math.pi / 180;
+                        })(),
+                        child: Icon(Icons.navigation, size: 120, color: Colors.green[700]),
+                      ),
+                    ],
+                  ),
+                  const SizedBox(height: 24),
+                  Text('Qibla direction: ${_qiblaDirection!.toStringAsFixed(1)}° from North'),
+                ],
+              ),
+      ),
+    );
+
+    if (widget.embedded) return body;
+
     return Scaffold(
       appBar: AppBar(
         title: const Text('Qibla Compass'),
@@ -81,42 +122,7 @@ class _QiblaPageState extends State<QiblaPage> {
               )
             : null,
       ),
-      body: Container(
-        width: double.infinity,
-        child: Center(
-          child: _qiblaDirection == null
-              ? _buildLocationPrompt(context)
-              : Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Stack(
-                      alignment: Alignment.center,
-                      children: [
-                        Container(
-                          width: 220,
-                          height: 220,
-                          decoration: BoxDecoration(
-                            shape: BoxShape.circle,
-                            color: Theme.of(context).colorScheme.surface,
-                            border: Border.all(color: Colors.green, width: 4),
-                          ),
-                        ),
-                        Transform.rotate(
-                          angle: (() {
-                            double a = (_qiblaDirection! - _heading) % 360;
-                            if (a > 180) a -= 360;
-                            return a * math.pi / 180;
-                          })(),
-                          child: Icon(Icons.navigation, size: 120, color: Colors.green[700]),
-                        ),
-                      ],
-                    ),
-                    const SizedBox(height: 24),
-                    Text('Qibla direction: ${_qiblaDirection!.toStringAsFixed(1)}° from North'),
-                  ],
-                ),
-        ),
-      ),
+      body: body,
     );
   }
 

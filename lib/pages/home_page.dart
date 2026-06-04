@@ -20,15 +20,23 @@ class _HomePageState extends State<HomePage> {
   final PageController _pageController = PageController();
   int _currentIndex = 0;
 
-  final List<Widget> _pages = const [
-    PhrasesPage(),
-    DuasPage(),
-    ToolsPage(),
-    PrayerTimesPage(),
-    FavoritesPage(),
+  final _toolsTitleNotifier = ValueNotifier<String>('Tools');
+  final _toolsCanPopNotifier = ValueNotifier<bool>(false);
+  final _toolsNavigatorKey = GlobalKey<NavigatorState>();
+
+  late final List<Widget> _pages = [
+    const PhrasesPage(),
+    const DuasPage(),
+    ToolsPage(
+      navigatorKey: _toolsNavigatorKey,
+      titleNotifier: _toolsTitleNotifier,
+      canPopNotifier: _toolsCanPopNotifier,
+    ),
+    const PrayerTimesPage(),
+    const FavoritesPage(),
   ];
 
-  final List<String> _titles = const [
+  final List<String> _baseTitles = const [
     'Islamic Phrases',
     'Daily Duas',
     'Tools',
@@ -37,11 +45,39 @@ class _HomePageState extends State<HomePage> {
   ];
 
   @override
+  void dispose() {
+    _toolsTitleNotifier.dispose();
+    _toolsCanPopNotifier.dispose();
+    _pageController.dispose();
+    super.dispose();
+  }
+
+  void _onToolsBack() {
+    _toolsNavigatorKey.currentState?.pop();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(_titles[_currentIndex]),
+        title: _currentIndex == 2
+            ? ValueListenableBuilder<String>(
+                valueListenable: _toolsTitleNotifier,
+                builder: (_, title, __) => Text(title),
+              )
+            : Text(_baseTitles[_currentIndex]),
         centerTitle: true,
+        leading: _currentIndex == 2
+            ? ValueListenableBuilder<bool>(
+                valueListenable: _toolsCanPopNotifier,
+                builder: (_, canPop, __) => canPop
+                    ? IconButton(
+                        icon: const Icon(Icons.arrow_back),
+                        onPressed: _onToolsBack,
+                      )
+                    : const SizedBox.shrink(),
+              )
+            : null,
         actions: [
           Consumer<ThemeProvider>(
             builder: (context, themeProvider, _) => IconButton(
