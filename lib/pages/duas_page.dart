@@ -70,7 +70,6 @@ class _DuasPageState extends State<DuasPage> {
               ),
             ),
             ...entry.value.map((dua) => Card(
-                  color: AppTheme.cardBg,
                   margin: const EdgeInsets.symmetric(vertical: 6),
                   child: ListTile(
                     title: ArabicText(

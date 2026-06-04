@@ -27,30 +27,41 @@ class _TasbihPageState extends State<TasbihPage> {
 
   @override
   Widget build(BuildContext context) {
-    return Center(
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Text(
-            '$_count',
-            style: const TextStyle(fontSize: 64, fontWeight: FontWeight.bold),
-          ),
-          const SizedBox(height: 32),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              ElevatedButton(
-                onPressed: _increment,
-                child: const Text('Tap'),
-              ),
-              const SizedBox(width: 24),
-              OutlinedButton(
-                onPressed: _reset,
-                child: const Text('Reset'),
-              ),
-            ],
-          ),
-        ],
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text('Tasbih Counter'),
+        leading: Navigator.of(context).canPop()
+            ? IconButton(
+                icon: const Icon(Icons.arrow_back),
+                onPressed: () => Navigator.of(context).pop(),
+              )
+            : null,
+      ),
+      body: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Text(
+              '_count',
+              style: const TextStyle(fontSize: 64, fontWeight: FontWeight.bold),
+            ),
+            const SizedBox(height: 32),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                ElevatedButton(
+                  onPressed: _increment,
+                  child: const Text('Tap'),
+                ),
+                const SizedBox(width: 24),
+                OutlinedButton(
+                  onPressed: _reset,
+                  child: const Text('Reset'),
+                ),
+              ],
+            ),
+          ],
+        ),
       ),
     );
   }

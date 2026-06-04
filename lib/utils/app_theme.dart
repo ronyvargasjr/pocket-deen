@@ -6,9 +6,9 @@ class AppTheme {
   static const Color accent = Color(0xFF388E3C);
   static const Color lightNavy = Color(0xFFB0C4DE); // Light navy blue
   static const Color darkNavy = Color.fromARGB(255, 48, 54, 61); // Light navy blue
-  static const TextStyle cardText1Style = TextStyle(fontSize: 22, fontWeight: FontWeight.bold, color: Colors.black); //Prayer name in Prayer page
-  static const TextStyle cardText2Style = TextStyle(fontSize: 22, color: Colors.black); //Time in Prayer page
-  static const TextStyle cardText3Style = TextStyle(fontSize: 16, color: Colors.black); //English text in phrases, duas pages
+  static const TextStyle cardText1Style = TextStyle(fontSize: 22, fontWeight: FontWeight.bold); //Prayer name in Prayer page
+  static const TextStyle cardText2Style = TextStyle(fontSize: 22); //Time in Prayer page
+  static const TextStyle cardText3Style = TextStyle(fontSize: 16); //English text in phrases, duas pages
 
 
   static final ThemeData lightTheme = ThemeData(

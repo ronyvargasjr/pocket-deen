@@ -52,6 +52,7 @@ class _PhrasesPageState extends State<PhrasesPage> {
 
   @override
   Widget build(BuildContext context) {
+    final onSurface = Theme.of(context).colorScheme.onSurface;
     return _phrases.isEmpty
         ? const Center(child: CircularProgressIndicator())
         : ListView.builder(
@@ -60,7 +61,6 @@ class _PhrasesPageState extends State<PhrasesPage> {
             itemBuilder: (context, index) {
               final phrase = _phrases[index];
               return Card(
-                color: AppTheme.cardBg,
                 margin: const EdgeInsets.symmetric(vertical: 8),
                 child: Padding(
                   padding: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 12.0),
@@ -79,7 +79,7 @@ class _PhrasesPageState extends State<PhrasesPage> {
                             ),
                           ),
                           IconButton(
-                            icon: const Icon(Icons.copy, color: Colors.black,),
+                            icon: Icon(Icons.copy, color: onSurface),
                             tooltip: 'Copy Arabic',
                             onPressed: () {
                               Clipboard.setData(ClipboardData(text: phrase['arabic']));
@@ -99,11 +99,11 @@ class _PhrasesPageState extends State<PhrasesPage> {
                               Expanded(
                                 child: Text(
                                   phrase['transliteration'],
-                                  style: const TextStyle(fontSize: 15, fontStyle: FontStyle.italic, color: Colors.black87),
+                                  style: TextStyle(fontSize: 15, fontStyle: FontStyle.italic, color: onSurface),
                                 ),
                               ),
                               IconButton(
-                                icon: const Icon(Icons.copy, color: Colors.black),
+                                icon: Icon(Icons.copy, color: onSurface),
                                 tooltip: 'Copy Transliteration',
                                 onPressed: () {
                                   Clipboard.setData(ClipboardData(text: phrase['transliteration']));

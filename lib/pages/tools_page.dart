@@ -69,7 +69,6 @@ class _ToolsPageState extends State<ToolsPage> {
       itemBuilder: (context, index) {
         final tool = _tools[index];
         return Card(
-          color: AppTheme.cardBg,
           margin: const EdgeInsets.symmetric(vertical: 8),
           child: ListTile(
             leading: Icon(tool['icon'], size: 36, color: Theme.of(context).colorScheme.primary),

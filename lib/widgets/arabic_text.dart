@@ -18,7 +18,7 @@ class ArabicText extends StatelessWidget {
           fontSize: fontSize,
           fontFamily: 'Amiri',
           fontWeight: FontWeight.bold,
-          color: Colors.black87,
+          color: Theme.of(context).colorScheme.onSurface,
         ),
       ),
     );

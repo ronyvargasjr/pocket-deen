@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:geolocator/geolocator.dart';
 import 'dart:async';
 import '../utils/app_theme.dart';
+import 'package:adhan/adhan.dart';
 
 class PrayerTimesPage extends StatefulWidget {
   const PrayerTimesPage({super.key});
@@ -23,38 +24,57 @@ class _PrayerTimesPageState extends State<PrayerTimesPage> {
   }
 
   Future<void> _fetchLocationAndTimes() async {
-    bool serviceEnabled = await Geolocator.isLocationServiceEnabled();
-    if (!serviceEnabled) {
-      setState(() => _loading = false);
-      return;
-    }
-    LocationPermission permission = await Geolocator.checkPermission();
-    if (permission == LocationPermission.denied) {
-      permission = await Geolocator.requestPermission();
-      if (permission == LocationPermission.denied) {
+    try {
+      bool serviceEnabled = await Geolocator.isLocationServiceEnabled();
+      if (!serviceEnabled) {
         setState(() => _loading = false);
         return;
       }
+      LocationPermission permission = await Geolocator.checkPermission();
+      if (permission == LocationPermission.denied) {
+        permission = await Geolocator.requestPermission();
+        if (permission == LocationPermission.denied) {
+          setState(() => _loading = false);
+          return;
+        }
+      }
+      if (permission == LocationPermission.deniedForever) {
+        setState(() => _loading = false);
+        return;
+      }
+      final pos = await Geolocator.getCurrentPosition();
+      setState(() {
+        _position = pos;
+      });
+
+      // Calculate prayer times using adhan_dart
+      final coordinates = Coordinates(pos.latitude, pos.longitude);
+      final params = CalculationMethod.muslim_world_league.getParameters();
+      final date = DateComponents.from(DateTime.now());
+      final prayerTimes = PrayerTimes(coordinates, date, params);
+
+      setState(() {
+        _prayerTimes = {
+          'Fajr': _formatTime(prayerTimes.fajr),
+          'Dhuhr': _formatTime(prayerTimes.dhuhr),
+          'Asr': _formatTime(prayerTimes.asr),
+          'Maghrib': _formatTime(prayerTimes.maghrib),
+          'Isha': _formatTime(prayerTimes.isha),
+        };
+        _loading = false;
+      });
+    } catch (e) {
+      setState(() {
+        _prayerTimes = null;
+        _loading = false;
+      });
     }
-    if (permission == LocationPermission.deniedForever) {
-      setState(() => _loading = false);
-      return;
-    }
-    final pos = await Geolocator.getCurrentPosition();
-    setState(() {
-      _position = pos;
-    });
-    // Placeholder: Replace with real prayer time calculation or API
-    setState(() {
-      _prayerTimes = {
-        'Fajr': '05:00',
-        'Dhuhr': '12:30',
-        'Asr': '15:45',
-        'Maghrib': '18:20',
-        'Isha': '19:40',
-      };
-      _loading = false;
-    });
+  }
+
+  String _formatTime(DateTime? dt) {
+    if (dt == null) return '--:--';
+    final local = dt.toLocal();
+    return local.hour.toString().padLeft(2, '0') + ':' + local.minute.toString().padLeft(2, '0');
   }
 
   @override
@@ -69,7 +89,6 @@ class _PrayerTimesPageState extends State<PrayerTimesPage> {
       padding: const EdgeInsets.all(24),
       children: _prayerTimes!.entries.map((entry) {
         return Card(
-          color: AppTheme.cardBg,
           margin: const EdgeInsets.symmetric(vertical: 10),
           child: ListTile(
             title: Text(
